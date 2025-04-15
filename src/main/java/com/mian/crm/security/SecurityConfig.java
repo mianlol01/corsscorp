@@ -63,7 +63,12 @@ public class SecurityConfig {
                             response.getWriter().write("{\"error\": \"Acceso denegado\"}");
                         }))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/public/**").permitAll()
+                        .requestMatchers(
+                                "/public/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

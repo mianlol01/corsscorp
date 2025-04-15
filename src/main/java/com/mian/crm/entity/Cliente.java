@@ -29,17 +29,17 @@ public class Cliente {
     private EstadoClienteEnum estado;
 
     @ManyToOne
-    private Empleado vendedorAsignado;
+    private Empleado empleado;
 
     // constructor sin id
     public Cliente(String nombre, String apellido, String correo, String telefono, String empresa,
-            EstadoClienteEnum estado, Empleado vendedorAsignado) {
+            EstadoClienteEnum estado, Empleado empleado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
         this.empresa = empresa;
         this.estado = estado;
-        this.vendedorAsignado = vendedorAsignado;
+        this.empleado = empleado;
     }
 }

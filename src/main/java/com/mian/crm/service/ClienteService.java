@@ -53,6 +53,12 @@ public class ClienteService {
                 .toList();
     }
 
+    public List<ClienteDTO> findClientesByVendedorId(Long idVendedor) {
+        return clienteRepository.findByEmpleadoId(idVendedor).stream()
+                .map(this::convertToDTO)
+                .toList();
+    }
+
     // convertir de cliente a clienteDTO
     private ClienteDTO convertToDTO(Cliente cliente) {
         ClienteDTO clienteDTO = new ClienteDTO();
@@ -63,7 +69,7 @@ public class ClienteService {
         clienteDTO.setTelefono(cliente.getTelefono());
         clienteDTO.setEmpresa(cliente.getEmpresa());
         clienteDTO.setEstado(cliente.getEstado());
-        clienteDTO.setVendedorAsignado(cliente.getVendedorAsignado());
+        clienteDTO.setVendedorAsignado(cliente.getEmpleado());
         return clienteDTO;
     }
 
@@ -76,7 +82,7 @@ public class ClienteService {
         cliente.setTelefono(clienteDTO.getTelefono());
         cliente.setEmpresa(clienteDTO.getEmpresa());
         cliente.setEstado(clienteDTO.getEstado());
-        cliente.setVendedorAsignado(empleadoRepository.findById(clienteDTO.getVendedorAsignadoId()).orElse(null));
+        cliente.setEmpleado(empleadoRepository.findById(clienteDTO.getVendedorAsignadoId()).orElse(null));
         return cliente;
 
     }

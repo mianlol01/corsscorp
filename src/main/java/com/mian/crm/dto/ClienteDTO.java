@@ -16,5 +16,4 @@ public class ClienteDTO {
     private String empresa;
     private EstadoClienteEnum estado;
     private Empleado vendedorAsignado;
-
 }

@@ -85,4 +85,13 @@ public class ClienteController {
         return ResponseEntity.ok("Cliente eliminado con éxito");
     }
 
+    @GetMapping("/vendedor/{idVendedor}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')")
+    public ResponseEntity<?> buscarClientesPorVendedor(@PathVariable Long idVendedor) {
+        List<ClienteDTO> clientes = clienteService.findClientesByVendedorId(idVendedor);
+        if (clientes.isEmpty()) {
+            return ResponseEntity.badRequest().body("No hay clientes para este vendedor");
+        }
+        return ResponseEntity.ok(clientes);
+    }
 }
